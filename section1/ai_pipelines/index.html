@@ -1,0 +1,1007 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../model_monitoring/">
+      
+      
+        <link rel="next" href="../ai_factsheet/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>5. AI Pipelines - MLOps Demo Lab</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.618322db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#5-ai-pipelines" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="MLOps Demo Lab" class="md-header__button md-logo" aria-label="MLOps Demo Lab" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            MLOps Demo Lab
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              5. AI Pipelines
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../data_ingestion/" class="md-tabs__link">
+          
+  
+  
+  1. End-to-End Data Science Labs
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="MLOps Demo Lab" class="md-nav__button md-logo" aria-label="MLOps Demo Lab" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    MLOps Demo Lab
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. End-to-End Data Science Labs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    1. End-to-End Data Science Labs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data_ingestion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Data Ingestion & Preparation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../model_training/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Model Training & Deployment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../model_deployment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Model Deployment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../model_monitoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Model Monitoring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. AI Pipelines
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. AI Pipelines
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#pipeline-description" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pipeline description
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pipeline-creation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pipeline creation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-an-autoai-experiment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create an AutoAI experiment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-a-data-refinery-job" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running a Data Refinery job
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-the-autoai-experiment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running the AutoAI Experiment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#promote-the-generated-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Promote the generated model
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploy-the-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deploy the model
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#end-of-lab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        End of Lab
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ai_factsheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. AI Factsheet
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#pipeline-description" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pipeline description
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pipeline-creation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pipeline creation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-an-autoai-experiment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create an AutoAI experiment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-a-data-refinery-job" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running a Data Refinery job
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-the-autoai-experiment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running the AutoAI Experiment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#promote-the-generated-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Promote the generated model
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploy-the-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deploy the model
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#end-of-lab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        End of Lab
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="5-ai-pipelines">5. AI Pipelines<a class="headerlink" href="#5-ai-pipelines" title="Permanent link">&para;</a></h1>
+<p>The <strong>Watson Pipelines</strong> editor provides a graphical interface for orchestrating an end-to-end flow of assets from creation through deployment. Assemble and configure a pipeline to create, train, deploy, and update machine learning models and Python scripts.</p>
+<p>Watson Pipelines is already configured once the service is installed.</p>
+<p>We're going to create a pipelines to refine data, train a model, choose the best model and deploy it in a deployment space. Through the use of pipelines, you can automate this process and parametrize to send different pipelines to cover several scenarios.</p>
+<h2 id="pipeline-description">Pipeline description<a class="headerlink" href="#pipeline-description" title="Permanent link">&para;</a></h2>
+<p>We are going to create a pipeline to run an AutoAI experiment and deploy to a deployment space. Steps of pipeline would be:</p>
+<div class="codehilite"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="kr">Run</span><span class="w"> </span><span class="n">existing</span><span class="w"> </span><span class="kd">Data</span><span class="w"> </span><span class="n">Refinery</span><span class="w"> </span><span class="n">flow</span><span class="w"> </span><span class="n">job</span><span class="w"> </span><span class="p">(</span><span class="n">drjob</span><span class="p">)</span><span class="w"> </span><span class="kr">to</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">shaped</span><span class="w"> </span><span class="kd">data</span><span class="w"> </span><span class="p">(</span><span class="n">customer_data_transactions_csv_shaped</span><span class="p">)</span>
+
+<span class="mf">2.</span><span class="w"> </span><span class="n">Create</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">AutoAI</span><span class="w"> </span><span class="nb">exp</span><span class="n">eriment</span>
+
+<span class="mf">3.</span><span class="w"> </span><span class="kr">Run</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">AutoAI</span><span class="w"> </span><span class="nb">exp</span><span class="n">eriment</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">select</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">best</span><span class="w"> </span><span class="n">model</span>
+
+<span class="mf">4.</span><span class="w"> </span><span class="n">Promote</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">selected</span><span class="w"> </span><span class="n">model</span><span class="w"> </span><span class="kr">to</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">deployment</span><span class="w"> </span><span class="n">space</span><span class="w"> </span><span class="p">(</span><span class="n">existing</span><span class="w"> </span><span class="n">dev</span><span class="w"> </span><span class="n">deployment</span><span class="w"> </span><span class="n">space</span><span class="p">)</span>
+
+<span class="mf">5.</span><span class="w"> </span><span class="n">Deploy</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="kr">on</span><span class="n">line</span><span class="w"> </span><span class="n">deployment</span><span class="w"> </span><span class="n">based</span><span class="w"> </span><span class="kr">on</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">model</span><span class="w"> </span><span class="n">selected</span><span class="mf">.</span>
+</code></pre></div>
+
+<p>You can see a diagram of the pipeline to create:</p>
+<p><img alt="image0" src="../assets/images/pipelines/image0.png" /></p>
+<h2 id="pipeline-creation">Pipeline creation<a class="headerlink" href="#pipeline-creation" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Open your project <strong>&lt;YourUser&gt; Customer Churn Prediction</strong></li>
+<li>
+<p>Click the <strong>New Asset+</strong> button.</p>
+<p><img alt="image0b" src="../assets/images/pipelines/image0b.png" /></p>
+</li>
+<li>
+<p>Then, select the asset type Pipelines:</p>
+<p><img alt="image1" src="../assets/images/pipelines/image1.png" /></p>
+</li>
+<li>
+<p>Enter the name <strong>&lt;YourUser&gt; Customer Churn Pipeline</strong> and the description <strong>Pipeline to create and run an AutoAI experiment and deploy the best model to UAT deployment space</strong>. Then click <strong>Create</strong>.</p>
+<p><img alt="image2" src="../assets/images/pipelines/image2.png" /></p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>We don't select Datastage functions because this service is not installed.</p>
+</div>
+</li>
+</ol>
+<h2 id="create-an-autoai-experiment">Create an AutoAI experiment<a class="headerlink" href="#create-an-autoai-experiment" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>Drag a <strong>Create AutoAI experiment</strong> node to the canvas, then click on the <strong>three dots</strong> at right side of the node to expand options and click <strong>Open</strong>. The settings for this node will expand at the right hand side:</p>
+<p><img alt="image3" src="../assets/images/pipelines/image3.png" /></p>
+</li>
+<li>
+<p>Set the following settings. Some settings will remain void to set by default options:</p>
+<ul>
+<li><strong>AutoAI experiment name</strong>: Will fill in with the name "Customer Churn pipeline experiment"</li>
+<li><strong>Select Scope</strong> is the project of space where the experiment will run. Select your project</li>
+<li><strong>Prediction type</strong> is the type of experiment we want to run: Binary classification, Multiclass classification or Regression. We select "Binary classification". Note that Time Series experiments are created with other node type.</li>
+<li><strong>Prediction column</strong>: "<em>CHURN</em>"</li>
+<li><strong>Positive class</strong>: "<em>T</em>"</li>
+</ul>
+<p><img alt="image4" src="../assets/images/pipelines/image4.png" /></p>
+<ul>
+<li><strong>Training data split ratio</strong>: Leave 0.9 as by default value</li>
+<li><strong>Algorithms to include</strong>: Algorithms to test during the AutoAI, leave it by default to take all of them into account</li>
+<li><strong>Algorithms to use</strong>: How many top performers algorithms to use to create the subsequent pipelines, set it to 1 to reduce compute time</li>
+<li><strong>Optimize metric</strong>: By default</li>
+<li><strong>Hardware specification</strong>: You can select a hardware specification defined in the project or in any other location. Select the CPUx2 size: <em>2 vCPU 8GB RAM</em></li>
+</ul>
+<p><img alt="image5" src="../assets/images/pipelines/image5.png" /></p>
+<ul>
+<li><strong>AutoAI experiment description</strong>: "AutoAI experiment to select best model to predict customer churn"</li>
+<li>No tags</li>
+<li><strong>Creation Mode</strong>: This is the action taken when the experiment finds another one with the same name: We select "Overwrite" to overwrite the existing AutoAI experiment.</li>
+</ul>
+<p>Then click <strong>Save</strong> to save this node's settings.</p>
+<p><img alt="image6" src="../assets/images/pipelines/image6.png" /></p>
+</li>
+</ol>
+<h2 id="running-a-data-refinery-job">Running a Data Refinery job<a class="headerlink" href="#running-a-data-refinery-job" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>Drag a <strong>Run Data Refinery job</strong> node to the canvas then click on the <strong>three dots</strong> at right side of the node to expand its options. Click <strong>Open</strong> to open the node settings at the right hand side:</p>
+<p><img alt="image7" src="../assets/images/pipelines/image7.png" /></p>
+</li>
+<li>
+<p>Set the following settings:</p>
+<ul>
+<li><strong>Data Refinery Job</strong>: Select the job you created in the previous lab <strong>&lt;YourUser&gt; drjob</strong>, from the current project.</li>
+</ul>
+<p><img alt="image8" src="../assets/images/pipelines/image8.png" /></p>
+<p><img alt="image9" src="../assets/images/pipelines/image9.png" /></p>
+<ul>
+<li><strong>Environment</strong>: Select the "<em>Default Data Refinery XS</em>" environment</li>
+<li>Don't override the default error policy, which states that pipeline will fail if error happens in this node.</li>
+</ul>
+<p>Then click <strong>Save</strong> to save this node's settings.</p>
+<p><img alt="image10" src="../assets/images/pipelines/image0.png" /></p>
+</li>
+</ol>
+<h2 id="running-the-autoai-experiment">Running the AutoAI Experiment<a class="headerlink" href="#running-the-autoai-experiment" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>Drag a <strong>Run AutoAI experiment</strong> node to the canvas and connect it to the previous nodes as shown below.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Note that links are not related to any data movement, but the sequence flow. The link between nodes notes the sequence of the process, and prevents the 2nd node to start before the 1st node has finished.</p>
+<p>In this particular case, the AutoAI experiment will start only if the AutoAI experiment has been created and DataRefinery job has finished, because it needs both elements to start the run.</p>
+</div>
+<p><img alt="image11" src="../assets/images/pipelines/image11.png" /></p>
+</li>
+<li>
+<p>Open the node. You could select any AutoAI experiment from your project, but in this case we're going to use the option <strong>from another node</strong>. This will use the experiment generated in the node "<strong>Create AutoAI experiment</strong>". Note that the type of result for this node shows as ("<em>AutoAI experiment</em>") when selecting it.</p>
+<p><img alt="image12" src="../assets/images/pipelines/image12.png" /></p>
+<p><img alt="image12b" src="../assets/images/pipelines/image12b.png" /></p>
+</li>
+<li>
+<p>Select the <strong>Training Data Asset</strong> to train the model. In this case, select the CSV file <strong>CUSTOMER_DATA_ready</strong> in your project. This is the file that's generated by the Data Refinery job.</p>
+<p><img alt="image13" src="../assets/images/pipelines/image13.png" /></p>
+<p><img alt="image13b" src="../assets/images/pipelines/image13b.png" /></p>
+</li>
+<li>
+<p>Check the rest of this node's properties:</p>
+<ul>
+<li>Don't select a holdout dataset</li>
+<li><strong>Models Count</strong>: Number of best models to create. Set it to 1 to get the best one only.</li>
+<li><strong>Run name</strong>: The name of each run, we leave it by default, it will define an automatic name.</li>
+<li><strong>Model name prefix</strong>: Leave it by default. It will use "<experiment name>-"</li>
+<li><strong>Run description</strong>: Insert the following description: "AutoAI experiment for predicting the likelihood of a customer to churn with a training Dataset shaped from selected data"</li>
+<li>Change the <strong>Creation Mode</strong> to "Overwrite", to allow overwriting models already created.</li>
+</ul>
+<p>Finally, click <strong>Save</strong> to save this node's settings.</p>
+<p><img alt="image15" src="../assets/images/pipelines/image15.png" /></p>
+</li>
+</ol>
+<h2 id="promote-the-generated-model">Promote the generated model<a class="headerlink" href="#promote-the-generated-model" title="Permanent link">&para;</a></h2>
+<p>The next step is to promote the model selected in the AutoAI experiment to a deployment space ("churnUATspace"). This is done with the "Copy assets" node.</p>
+<ol>
+<li>
+<p>Drag a <strong>Copy assets</strong> node to the canvas and connect it to the "Run AutoAI experiment" node as seen in the screenshot below. This connection is needed to get the model result of the previous node to use it in this node:</p>
+<p><img alt="image15b" src="../assets/images/pipelines/image15b.png" /></p>
+</li>
+<li>
+<p>Open the node settings. The <strong>Source Asset</strong> will be the best model selected in the previous node. Choose the <strong>Select from another node</strong> option and select the "Run AutoAI experiment" node, and the <strong>Best model</strong> option.</p>
+<p><img alt="image16" src="../assets/images/pipelines/image16.png" /></p>
+<p><img alt="image16b" src="../assets/images/pipelines/image16b.png" /></p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Note that you could choose 2 options from an AI experiment: "The best model" to select the best model and "Models" to select all the models that were generated.</p>
+</div>
+</li>
+<li>
+<p>For the <strong>Target</strong>, select the <strong>churnUATspace</strong> deployment space.</p>
+<p><img alt="image17" src="../assets/images/pipelines/image17.png" /></p>
+<p><img alt="image17b" src="../assets/images/pipelines/image17b.png" /></p>
+</li>
+<li>
+<p>Finally, select the <strong>Overwrite</strong> mode to overwrite the model in the space each time we run the pipeline. Then click <strong>Save</strong> to save this node's settings.</p>
+<p><img alt="image18" src="../assets/images/pipelines/image18.png" /></p>
+</li>
+</ol>
+<h2 id="deploy-the-model">Deploy the model<a class="headerlink" href="#deploy-the-model" title="Permanent link">&para;</a></h2>
+<p>The final step is to deploy an online model based on the model that was promoted to the deployment space.</p>
+<ol>
+<li>
+<p>Drag a <strong>Create online deployment</strong> node to the canvas and connect it to the "Copy assets" node as seen below. This connection is needed to get the model promoted to the deployment space in the previous step, and use it in this node.</p>
+<p><img alt="image19" src="../assets/images/pipelines/image19.png" /></p>
+</li>
+<li>
+<p>Open the node settings. Set the option to <strong>Select from another node</strong> and select the "Copy assets" node, using the model that was promoted <strong>winning_model</strong>.</p>
+<p><img alt="image20" src="../assets/images/pipelines/image20.png" /></p>
+<p><img alt="image20b" src="../assets/images/pipelines/image20b.png" /></p>
+</li>
+<li>
+<p>Select the <strong>Overwrite</strong> option for "Creation Mode", to let it overwrite the deployment in case there is an existing one. Leave "New deployment name", "New deployment description" and "New deployment tags" by default. Then click <strong>Save</strong>.</p>
+<p><img alt="image21" src="../assets/images/pipelines/image21.png" /></p>
+</li>
+<li>
+<p>Finally, you can run the Pipeline as a <strong>Trial Run</strong>. This creates a trial job to run the pipeline. You could also create a job to schedule it or run it by demand.</p>
+<p><img alt="image22" src="../assets/images/pipelines/image22.png" /></p>
+<p>For the Job run name, use <strong>&lt;YourUser&gt;_testrun</strong>. Then click <strong>Run</strong>.</p>
+<p><img alt="image23" src="../assets/images/pipelines/image23.png" /></p>
+</li>
+<li>
+<p>During the run, you can inspect logs clicking on the node:</p>
+<p><img alt="image12" src="../assets/images/pipelines/image24.png" /></p>
+</li>
+</ol>
+<h2 id="end-of-lab">End of Lab<a class="headerlink" href="#end-of-lab" title="Permanent link">&para;</a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", {"toc.integrate": false}, "toc.follow", "content.code.copy", "content.tabs.link", "header.autohide"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+    
+  </body>
+</html>

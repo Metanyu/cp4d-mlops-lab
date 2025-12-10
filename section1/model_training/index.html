@@ -1,0 +1,927 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../data_ingestion/">
+      
+      
+        <link rel="next" href="../model_deployment/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>2. Model Training & Deployment - MLOps Demo Lab</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.618322db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#2-model-training" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="MLOps Demo Lab" class="md-header__button md-logo" aria-label="MLOps Demo Lab" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            MLOps Demo Lab
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              2. Model Training & Deployment
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../data_ingestion/" class="md-tabs__link">
+          
+  
+  
+  1. End-to-End Data Science Labs
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="MLOps Demo Lab" class="md-nav__button md-logo" aria-label="MLOps Demo Lab" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    MLOps Demo Lab
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. End-to-End Data Science Labs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    1. End-to-End Data Science Labs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data_ingestion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Data Ingestion & Preparation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Model Training & Deployment
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Model Training & Deployment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-1-train-autoai-model-for-churn-prediction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 1: Train AutoAI Model for Churn Prediction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-2-deploy-your-model-through-deployment-space" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 2: Deploy your model through deployment space
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-3-train-churn-prediction-model-with-jupyter-notebook" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 3: Train Churn Prediction Model with Jupyter Notebook
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#end-of-lab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        End of Lab
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../model_deployment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Model Deployment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../model_monitoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Model Monitoring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ai_pipelines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. AI Pipelines
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ai_factsheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. AI Factsheet
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-1-train-autoai-model-for-churn-prediction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 1: Train AutoAI Model for Churn Prediction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-2-deploy-your-model-through-deployment-space" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 2: Deploy your model through deployment space
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-3-train-churn-prediction-model-with-jupyter-notebook" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 3: Train Churn Prediction Model with Jupyter Notebook
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#end-of-lab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        End of Lab
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="2-model-training">2. Model Training<a class="headerlink" href="#2-model-training" title="Permanent link">&para;</a></h1>
+<h2 id="exercise-1-train-autoai-model-for-churn-prediction">Exercise 1: Train AutoAI Model for Churn Prediction<a class="headerlink" href="#exercise-1-train-autoai-model-for-churn-prediction" title="Permanent link">&para;</a></h2>
+<p>In this section, we illustrate how to leverage AutoAI to quickly train multiple AI models for churn prediction and select the pipeline that delivers best performance.</p>
+<ol>
+<li>
+<p>Navigate back to your project and click <strong>Assets</strong> tab, click <strong>New asset</strong> + and select <strong>AutoAI</strong>.</p>
+<p><img alt="NewAsset2" src="../assets/images/autoai/NewAsset2.png" /></p>
+<p><img alt="AutoAIAsset" src="../assets/images/autoai/AutoAIAsset.png" /></p>
+</li>
+<li>
+<p>Provide the following name to your AutoAI experiment: <strong>&lt;YourUser&gt;_autoai_churn_prediction</strong>, keep the default Compute configuration and click Create.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You could select a different configuration if you needed to assign more resources for your AutoAI experiment.</p>
+</div>
+<p><img alt="ConfigureAutoAI" src="../assets/images/autoai/ConfigureAutoAI.png" /></p>
+</li>
+<li>
+<p>On the AutoAI add data sources page, click the <strong>Select from project</strong> button since you will be using the dataset you had created earlier with Data Refinery.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You could also click Browse to upload data from your local machine.</p>
+</div>
+<p><img alt="AddDataSourcesFromProject" src="../assets/images/autoai/AddDataSourcesFromProject.png" /></p>
+</li>
+<li>
+<p>Click Data asset and select the checkbox to select the <strong>CUSTOMER_DATA_ready</strong> dataset. Then click <strong>Select asset</strong>.</p>
+<p><img alt="SelectCustomerDataReady" src="../assets/images/autoai/SelectCustomerDataReady.png" /></p>
+</li>
+<li>
+<p>On the next page, you will see the selected dataset and you will be prompted to select whether you want to Create a time series forecast which is supported by AutoAI. Click <strong>No</strong> since customer churn prediction is a classification use case and not a time series forecasting use case.</p>
+<p>Once you click No, you will get the option to select which column to predict. Scroll down the list to select the <strong>CHURN</strong> column. At this point, we have provided the data set, indicated it is a classification use case and selected the prediction column. Click <strong>Run experiment</strong> (blue button) to kick off the AutoAI run.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Note that you can click the Experiment settings to review the default settings and change some of the configurations if you wish. Review those settings as they’re very informative.</p>
+</div>
+<p><img alt="PreconditionConfig" src="../assets/images/autoai/PredictionConfiguration.png" /></p>
+</li>
+<li>
+<p>AutoAI runs for a few minutes on this dataset and produces a number of pipelines as shown in figure below including training/test data split, data preprocessing, feature engineering, model selection, and hyperparameter optimization. You can dig deeper into any of the pipelines to better understand feature importance, the resulting metrics, the selected model, and any applied feature transformation.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>While waiting for AutoAI’s run to complete, you could review the <a href="https://www.ibm.com/docs/en/cloud-paks/cp-data/latest?topic=models-autoai">AutoAI Documentation</a>.</p>
+<p>Specifically, review the <a href="https://www.ibm.com/docs/en/cloud-paks/cp-data/latest?topic=autoai-implementation-details">AutoAI Implementation Details</a> to understand what algorithms are supported, what data transformations are applied and what metrics can be optimized.</p>
+</div>
+<p><img alt="AutoAIModelPred" src="../assets/images/autoai/AutoAIModelPrediction.png" /></p>
+<p>The AutoAI run will take 4-5 minutes to complete. Once complete, please spend a few minutes exploring the dashboard:</p>
+<ul>
+<li>Switch between the <strong>Experiment details</strong> and the <strong>Legend</strong> information (annotated with red rectangles in previous figure) to better understand the generated Relationship map.</li>
+<li>Switch between <strong>Cross Validation</strong> and <strong>Holdout</strong> results by clicking the icon next to Cross Validation (annotated with red oval in previous figure) to see how the pipeline ranking changed depending on which data is being evaluated.</li>
+<li>Swap the view between the <strong>Relationship map</strong> and the <strong>Progress map</strong> (annotated with blue oval in previous figure) to see the different views of the AutoAI pipeline creation process.</li>
+<li>Click on the top pipeline (annotated with blue rectangle in previous figure) to review the details for that pipeline. AutoAI reports several valuable evaluation criteria like several performance metrics (Accuracy, Area under ROC, Precision, Recall, F1) as well asthe confusion matrix, Precision Recall Curve, and feature importance. If the pipeline also included feature engineering (or feature transformation), the pipeline details will explain what transformations were applied. Close the pipeline details window by clicking x top right of window.</li>
+</ul>
+<p>After reviewing the trained pipelines, you can decide which one you’d like to save as a model to deploy. Assuming you select the first pipeline, mouse over the first pipeline and click <strong>Save as</strong> (annotated with red arrow in figure above).</p>
+</li>
+<li>
+<p>On the Save As page, select <strong>Model</strong>, keep the default name, and click <strong>Create</strong>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Note that you could also save the pipeline as a Notebook which you can customize further.</p>
+</div>
+<p><img alt="AutoAISaveModel" src="../assets/images/autoai/AutoAISaveModel.png" /></p>
+</li>
+</ol>
+<h2 id="exercise-2-deploy-your-model-through-deployment-space">Exercise 2: Deploy your model through deployment space<a class="headerlink" href="#exercise-2-deploy-your-model-through-deployment-space" title="Permanent link">&para;</a></h2>
+<p>Let's promote the trained model to a UAT (Testing) Deployment Space, then deploy it so it's ready to be called for testing.</p>
+<ol>
+<li>
+<p>Navigate back to the project assets by clicking your project's name and then clicking the <strong>Assets</strong> tab.</p>
+<p>Click on the menu of your saved model <strong>&lt;YourUser&gt;_autoai_churn_prediction - P5 Extra Trees Classifier - Model</strong> then click Promote to space. Note that the name of your model may be different.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Note that the name of your model may be different. Even a different classifier may have been used in your case.</p>
+</div>
+<p><img alt="AutoAIModel" src="../assets/images/deploy/AutoAIModel.png" /></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p><strong>Deployment spaces</strong> allow you to create deployments for machine learning models and functions and view and manage all of the activity and assets for the deployments, including data connections and connected data assets.</p>
+<p>A deployment space is not associated with a project. You can deploy assets from multiple projects to a space, and you can deploy assets to more than one space. For example, you might have a <strong>Test</strong> space for evaluating deployments, and a <strong>Production</strong> space for deployments you want to deploy in business applications.</p>
+</div>
+</li>
+<li>
+<p>On the Promote to space page, select the <strong>churnUATspace</strong> from Target Space drop-down. Keep the default selected version (Current) and click <strong>Promote</strong>.</p>
+<p><img alt="PromoteToDevSpace" src="../assets/images/deploy/PromoteToDevelopmentSpace.png" /></p>
+</li>
+<li>
+<p>Once the model is successfully promoted to the deployment space, you will see a notification message. Click on the <strong>deployment space</strong> link to navigate to the deployment space.</p>
+<p><img alt="CheckDeploySpace" src="../assets/images/deploy/CheckDeploymentSpace.png" /></p>
+</li>
+<li>
+<p>On the <strong>churnUATspace</strong> deployment space page, your AutoAI model <strong>&lt;YourUser&gt;_autoai_churn_prediction – P7 XGBClassifier</strong> is ready to be deployed for consumption. Click on the 3-dot menu next to the model then click <strong>Deploy</strong>.</p>
+<p><img alt="DeployModel" src="../assets/images/deploy/DeployModel.png" /></p>
+</li>
+<li>
+<p>On the <strong>Create a deployment</strong> page, select <strong>Online</strong>, add the Name <strong>&lt;YourUser&gt;_autoai_churn</strong> and click <strong>Create</strong>.</p>
+<p><img alt="CreateOnlDeploy" src="../assets/images/deploy/CreateOnlineDeployment.png" /></p>
+</li>
+<li>
+<p>Click on the <strong>Deployments</strong> tab and wait until the deployment status changes to Deployed. Then click on the deployed model name <strong>&lt;YourUser&gt;_autoai_churn</strong>.</p>
+<p><img alt="DeployOnlDeploy" src="../assets/images/deploy/DeployOnlineDeployment.png" /></p>
+</li>
+<li>
+<p>On the model page API reference tab, review the model Endpoint and the various Code snippets (in different coding languages) to illustrate how to make an API call to the deployed model. Then select the Test tab, click on the <strong>Provide input data as JSON</strong> icon, paste the following JSON sample in the <strong>Enter input data</strong> window and click <strong>Predict</strong> (blue button).</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Use the copy button in the code snippet below to keep the right format of the content when pasting.</p>
+</div>
+<p><div class="highlight"><pre><span></span><code><span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;input_data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;fields&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;ID&quot;</span><span class="p">,</span><span class="s2">&quot;LONGDISTANCE&quot;</span><span class="p">,</span><span class="s2">&quot;INTERNATIONAL&quot;</span><span class="p">,</span><span class="s2">&quot;LOCAL&quot;</span><span class="p">,</span><span class="s2">&quot;DROPPED&quot;</span><span class="p">,</span><span class="s2">&quot;PAYMETHOD&quot;</span><span class="p">,</span><span class="s2">&quot;LOCALBILLTYPE&quot;</span><span class="p">,</span><span class="s2">&quot;LONGDISTANCEBILLTYPE&quot;</span><span class="p">,</span><span class="s2">&quot;USAGE&quot;</span><span class="p">,</span><span class="s2">&quot;RATEPLAN&quot;</span><span class="p">,</span><span class="s2">&quot;GENDER&quot;</span><span class="p">,</span><span class="s2">&quot;STATUS&quot;</span><span class="p">,</span><span class="s2">&quot;CHILDREN&quot;</span><span class="p">,</span><span class="s2">&quot;ESTINCOME&quot;</span><span class="p">,</span><span class="s2">&quot;CAROWNER&quot;</span><span class="p">,</span><span class="s2">&quot;AGE&quot;</span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;values&quot;</span><span class="p">:[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">28</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;Auto&quot;</span><span class="p">,</span><span class="s2">&quot;FreeLocal&quot;</span><span class="p">,</span><span class="s2">&quot;Standard&quot;</span><span class="p">,</span><span class="mi">89</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="s2">&quot;F&quot;</span><span class="p">,</span><span class="s2">&quot;M&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">23000</span><span class="p">,</span><span class="s2">&quot;N&quot;</span><span class="p">,</span><span class="mi">45</span><span class="p">]]</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+</code></pre></div>
+<img alt="TestOnlDeployPred" src="../assets/images/deploy/TestOnlineDeploymentPrediction.png" />
+<img alt="TestOnlDeployPred2" src="../assets/images/deploy/TestOnlineDeploymentPrediction2.png" /></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>The deployed model will predict the likelihood of the user to churn given the specific values for the various features. The model returns the predicted churn label as “T” (true) or “F” (false) and the probability of that prediction which effectively expresses the likelihood of that user to churn (or not). A “T” label returned by the model indicates the user is likely to churn and the corresponding probability.</p>
+<p>These probabilities can be used in conjunction with the predicted label to better serve customers on a more granular basis. Your application can be customized to make decisions based on the predicted label and the probabilities of that prediction.</p>
+</div>
+</li>
+</ol>
+<h2 id="exercise-3-train-churn-prediction-model-with-jupyter-notebook">Exercise 3: Train Churn Prediction Model with Jupyter Notebook<a class="headerlink" href="#exercise-3-train-churn-prediction-model-with-jupyter-notebook" title="Permanent link">&para;</a></h2>
+<p>In this section, we illustrate an alternate method for training AI models in Cloud Pak for Data, namely by using Jupyter notebook and open-source libraries. This is a very common and mostly preferred method by data scientists as it provides them with the utmost flexibility in exploring different algorithms for training best performing AI models.</p>
+<ol>
+<li>
+<p>Go back to your project. Then click <strong>New asset +</strong> and select <strong>Jupyter notebook editor</strong>.</p>
+<p><img alt="AddJupyterNotebookAsset" src="../assets/images/notebook/AddJupyterNotebookAsset.png" /></p>
+</li>
+<li>
+<p>On the New notebook page, go to the <strong>Local file</strong> tab and click the <strong>Drag and drop files here or upload</strong>. Select the notebook that you downloaded before <a href="../assets/churn_prediction_pyspark.ipynb">churn_prediction_pyspark.ipynb</a> to upload it. Then, select the runtime <strong>Default Spark 3.5 &amp; Python 3.11</strong> (we will be using PySpark to run this Notebook on CP4D). Finally, click <strong>Create</strong>.</p>
+<p><img alt="ChooseRuntime" src="../assets/images/notebook/ChooseRuntime.png" /></p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><strong>DO NOT RUN THE NOTEBOOK YET</strong> A change is needed first to avoid all users from overiding other users' work.</p>
+</div>
+</li>
+<li>
+<p><strong>DO NOT RUN THE NOTEBOOK YET</strong>. First, review the notebook comments to get an idea of what the Notebook is going to do:</p>
+<div class="admonition info notebook steps">
+<p class="admonition-title">Info</p>
+<p>a. <strong>Access the CUSTOMER_DATA_ready dataset</strong> from your project.</p>
+<p>b. Process the data to <strong>prepare features</strong> relevant for the prediction.</p>
+<p>c. <strong>Train a Random Forest ML model</strong> to predict the likelihood of customers to churn using a sample of the data.</p>
+<p>d. <strong>Evaluate the model</strong> against test data not used in training.</p>
+<p>e. Create the Deployment Space <strong>churnUATspace</strong> if it doesn't exist.</p>
+<p>f. Associate Watson Machine Learning with the <em>churnUATspace</em> deployment space.</p>
+<p>g. <strong>Store the model</strong> in the churnUATspace deployment space</p>
+<p>h. <strong>Deploy the model</strong> in the churnUATspace deployment space.</p>
+<p>i.Run a test to <strong>validate the online deployment</strong> of the model.</p>
+</div>
+</li>
+<li>
+<p>Go to the following lines and <strong>add your username</strong> to the MODEL_NAME and DEPLOYMENT_NAME variables:</p>
+<ul>
+<li>MODEL_NAME = "<YourUser> Churn Model"</li>
+<li>DEPLOYMENT_NAME = "<YourUser> Churn Deployment"</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># Provide a target name for your churn model</span>
+<span class="n">MODEL_NAME</span> <span class="o">=</span> <span class="s2">&quot;&lt;YourUser&gt; Churn Model&quot;</span>
+<span class="c1"># Provide a target name for your churn model deployment</span>
+<span class="n">DEPLOYMENT_NAME</span> <span class="o">=</span> <span class="s2">&quot;&lt;YourUser&gt; Churn Deployment&quot;</span>
+</code></pre></div>
+<p>For example, for user0:</p>
+<p><img alt="ModelName" src="../assets/images/notebook/ModelName.png" /></p>
+</li>
+<li>
+<p>Now, run all the cells and review the output of each one.</p>
+</li>
+<li>
+<p>If all cells ran successfully, your model should be deployed. Go to the Menu <strong>Deployments</strong>.</p>
+<p><img alt="Deployments" src="../assets/images/notebook/Deployments.png" /></p>
+</li>
+<li>
+<p>On the <strong>Deployments</strong> page, go to the tab <strong>Spaces</strong> and click the <strong>churnUATspace</strong> space.</p>
+<p><img alt="churnUATspace" src="../assets/images/notebook/churnUATSpace.png" /></p>
+</li>
+<li>
+<p>Go to tab <strong>Deployments</strong>. The model that you trained and deployed from the Jupyter Notebook is available for consumption.</p>
+<p><img alt="ModelAvailable" src="../assets/images/notebook/ModelAvailable.png" /></p>
+</li>
+</ol>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>You have reached the end of this lab.</p>
+</div>
+<h2 id="end-of-lab">End of Lab<a class="headerlink" href="#end-of-lab" title="Permanent link">&para;</a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", {"toc.integrate": false}, "toc.follow", "content.code.copy", "content.tabs.link", "header.autohide"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+    
+  </body>
+</html>

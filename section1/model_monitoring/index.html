@@ -1,0 +1,1234 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../model_deployment/">
+      
+      
+        <link rel="next" href="../ai_pipelines/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>4. Model Monitoring - MLOps Demo Lab</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.618322db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#4-model-monitoring" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="MLOps Demo Lab" class="md-header__button md-logo" aria-label="MLOps Demo Lab" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            MLOps Demo Lab
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              4. Model Monitoring
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../data_ingestion/" class="md-tabs__link">
+          
+  
+  
+  1. End-to-End Data Science Labs
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="MLOps Demo Lab" class="md-nav__button md-logo" aria-label="MLOps Demo Lab" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    MLOps Demo Lab
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. End-to-End Data Science Labs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    1. End-to-End Data Science Labs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data_ingestion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Data Ingestion & Preparation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../model_training/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Model Training & Deployment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../model_deployment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Model Deployment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Model Monitoring
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Model Monitoring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-enable-model-monitoring-for-an-online-deployment-through-openscale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise: Enable model monitoring for an online deployment through OpenScale
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercise: Enable model monitoring for an online deployment through OpenScale">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enabling-monitoring-for-our-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enabling monitoring for our model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#model-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Model Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-quality" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configure Quality
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-fairness" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configure Fairness
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-drift" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configure Drift
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-explainability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configure Explainability
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evaluating-the-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Evaluating the model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reviewing-fairness-and-explainability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reviewing Fairness and Explainability
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reviewing-drift" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reviewing Drift
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ai_pipelines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. AI Pipelines
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ai_factsheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. AI Factsheet
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-enable-model-monitoring-for-an-online-deployment-through-openscale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise: Enable model monitoring for an online deployment through OpenScale
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercise: Enable model monitoring for an online deployment through OpenScale">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enabling-monitoring-for-our-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enabling monitoring for our model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#model-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Model Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-quality" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configure Quality
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-fairness" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configure Fairness
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-drift" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configure Drift
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-explainability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configure Explainability
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evaluating-the-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Evaluating the model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reviewing-fairness-and-explainability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reviewing Fairness and Explainability
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reviewing-drift" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reviewing Drift
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="4-model-monitoring">4. Model Monitoring<a class="headerlink" href="#4-model-monitoring" title="Permanent link">&para;</a></h1>
+<h2 id="exercise-enable-model-monitoring-for-an-online-deployment-through-openscale">Exercise: Enable model monitoring for an online deployment through OpenScale<a class="headerlink" href="#exercise-enable-model-monitoring-for-an-online-deployment-through-openscale" title="Permanent link">&para;</a></h2>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>A key component of a Governed MLOps solution is the ability to monitor AI models for accuracy, fairness, explainability and drift. These capabilities deliver trustworthy AI which business leaders can safely adopt in their business processes and customer engagements.</p>
+<p>With multiple client engagements, we have found that having the confidence to trust AI models is just as important, and sometime even more important, than the performance of the AI models. Watson OpenScale, a component of Watson Studio and Cloud Pak for Data, is IBM’s solution to deliver trustworthy AI and enable monitoring of AI models for fairness, explainability and drift.</p>
+</div>
+<p>In this lab you will learn how to leverage Watson OpenScale to monitor the churn prediction model we previously deployed to Watson Machine Learning.</p>
+<h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h3>
+<p>Later in this lab, you're going to provide OpenScale the training data of the model. Watson OpenScale supports reading training data from a CSV file, from Db2, and from Cloud Object Storage (COS). The training data in this workshop is stored locally in a CSV file.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Review <a href="https://www.ibm.com/docs/en/cloud-paks/cp-data/5.2.x?topic=models-faqs#trainingdata">Why does OpenScale need access to my training data</a> for more details on why the training data is needed. </p>
+</div>
+<h3 id="enabling-monitoring-for-our-model">Enabling monitoring for our model<a class="headerlink" href="#enabling-monitoring-for-our-model" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>Go to menu <strong>Deployments</strong>:</p>
+<p><img alt="menuDeployments" src="../assets/images/openscale/menuDeployments.png" /></p>
+</li>
+<li>
+<p>Open the <strong>churnUASpace</strong> space where you deployed your initial AutoAI-generated Model for testing.</p>
+<p><img alt="churnUATSpace" src="../assets/images/openscale/churnUATSpace.png" /></p>
+</li>
+<li>
+<p>In the <strong>Deployments</strong> tab, open any of the <strong>Churn Deployment</strong> deployment. We're going to monitor this deployed model.</p>
+<p><img alt="openYourDeployment" src="../assets/images/openscale/openYourDeployment.png" /></p>
+</li>
+<li>
+<p>Go the <strong>Evaluations</strong> tab and click <strong>Configure OpenScale evaluation settings</strong>.</p>
+<p><img alt="openOpenscaleSettings" src="../assets/images/openscale/openOpenscaleSettings.png" /></p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you see the following message, click Associate a server instance:
+<img alt="associateServerInstance" src="../assets/images/openscale/associateServerInstance.png" /></p>
+</div>
+<p>The following menu will appear. You're going to configure the monitors in the following section.</p>
+<p><img alt="openScaleMenu" src="../assets/images/openscale/openScaleMenu.png" /></p>
+</li>
+</ol>
+<h3 id="model-configuration">Model Configuration<a class="headerlink" href="#model-configuration" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>Click on Reconfigure model to open the Model Configuration window.</p>
+<p><img alt="reconfigModel" src="../assets/images/openscale/reconfigModel.png" /></p>
+</li>
+<li>
+<p>In the Model Configuration window, select <strong>Use manual setup</strong> and click <strong>Next</strong>.</p>
+<p><img alt="ManualSetup" src="../assets/images/openscale/ManualSetup.png" /></p>
+</li>
+<li>
+<p>For the simplicity of this workshop, we're going to upload the training data from a CSV file. Select <strong>Upload file</strong> and upload [customer_training_data.csv] .</p>
+<p><img alt="ConfigModelTrainData" src="../assets/images/openscale/ConfigModelTrainData.png" /></p>
+</li>
+<li>
+<p>For the feature columns, accept the default which selects all the features. Click <strong>Next</strong>.</p>
+<p><img alt="ConfigModelTrainData2" src="../assets/images/openscale/ConfigModelTrainData2.png" /></p>
+</li>
+<li>
+<p>For the model output, select probability and predictedLabel as shown below. Then click <strong>Next</strong>.</p>
+<p><img alt="ConfigModelTrainData3" src="../assets/images/openscale/ConfigModelTrainData3.png" /></p>
+</li>
+</ol>
+<p>The training data has been loaded to OpenScale.</p>
+<h3 id="configure-quality">Configure Quality<a class="headerlink" href="#configure-quality" title="Permanent link">&para;</a></h3>
+<p>Let's configure the Quality controls for our model.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Watson OpenScale can monitor the Quality metric which measures the model’s ability to correctly predict outcomes that match labeled data.</p>
+</div>
+<ol>
+<li>
+<p>Select <strong>Quality</strong> from the Evaluations section. Then click the pencil icon.</p>
+<p><img alt="image29" src="../assets/images/openscale/image29.png" /></p>
+</li>
+<li>
+<p>Specify the Threshold value for <strong>Area under ROC</strong> to be <strong>0.9</strong> and click <strong>Next</strong>. This means that when the Area under ROC is less than 0.9, the quality monitor will flag an alert.</p>
+<p><img alt="image30" src="../assets/images/openscale/image30.png" /></p>
+</li>
+<li>
+<p>Change the Minimum sample size to 100. In production, you should use larger sample sizes to make sure they’re representative of the requests the model receives. Click Save.</p>
+<p><img alt="image31" src="../assets/images/openscale/image31.png" /></p>
+</li>
+</ol>
+<h3 id="configure-fairness">Configure Fairness<a class="headerlink" href="#configure-fairness" title="Permanent link">&para;</a></h3>
+<p>Let's configure the Fairness controls for our model.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>In the fairness monitor, you specify to Watson OpenScale which features to monitor and what are the favourable outcomes. The Watson OpenScale fairness monitor determines whether outcomes that are produced by your model are fair or not for monitored group. When fairness monitoring is enabled, it generates a set of metrics every hour by default. You can generate these metrics on demand by clicking the <strong>Check fairness now</strong> button or by using the Python client.</p>
+<p>Watson OpenScale automatically identifies whether any known protected attributes are present in a model. When Watson OpenScale detects these attributes, it automatically recommends configuring bias monitors for each attribute present, to ensure that bias against these potentially sensitive attributes is tracked in production.</p>
+<p>Currently, Watson OpenScale detects and recommends monitors for the following protected attributes (sex, ethnicity, marital status, age, zip code).</p>
+</div>
+<ol>
+<li>
+<p>Select <strong>Fairness</strong> in the Evaluations section and click the pencil icon to configure the fairness monitor.</p>
+<p><img alt="image33" src="../assets/images/openscale/image33.png" /></p>
+</li>
+<li>
+<p>Select <strong>Configure manually</strong> then click <strong>Next</strong>.</p>
+<p><img alt="image33b" src="../assets/images/openscale/image33b.png" /></p>
+</li>
+<li>
+<p>Next, select the favorable outcomes, specify <strong>F</strong> (false) as Favorable value (client is not going to churn), and <strong>T</strong> (true) as Unfavorable value. Then click <strong>Next</strong>.</p>
+<p><img alt="image34" src="../assets/images/openscale/image34.png" /></p>
+</li>
+<li>
+<p>Next, select the <strong>Minimum sample size</strong> to be <strong>100</strong>. In production, you may want to select a larger sample size to make sure it is representative.</p>
+<p><img alt="image35" src="../assets/images/openscale/image35.png" /></p>
+</li>
+<li>
+<p>Keep the default selections set to Disparate impact. Then Click <strong>Next</strong>.</p>
+<p><img alt="image35b" src="../assets/images/openscale/image35b.png" /></p>
+</li>
+<li>
+<p>Leave the default values and click <strong>Next</strong>.</p>
+<p><img alt="image35c" src="../assets/images/openscale/image35c.png" /></p>
+</li>
+<li>
+<p>OpenScale automatically detected the features GENDER and AGE as candidates for being monitored for fairness by analyzing the training data. Click <strong>Next</strong>.</p>
+<p><img alt="image36" src="../assets/images/openscale/image36.png" />
+8. For the AGE feature, you can specify the reference and monitored groups. Again, Watson OpenScale automatically recommends which group should be the reference and which group(s) should be monitored by analyzing the training data. Accept the default selections by Watson OpenScale. Click <strong>Next</strong>.</p>
+<p><img alt="image37" src="../assets/images/openscale/image37.png" /></p>
+</li>
+<li>
+<p>Set the fairness alert threshold for AGE to 95 which effectively indicates that OpenScale will raise an alert when the model predicts a favorable outcome for the monitored group 95% of the times less than a favorable outcome for the reference group.</p>
+<p><img alt="image37b" src="../assets/images/openscale/image37b.png" /></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Check the <a href="https://www.ibm.com/docs/en/cloud-paks/cp-data/5.2.x?topic=evaluations-calculating-fairness">How it works</a> section in the documentation to better understand how fairness of the model is computed by OpenScale.</p>
+</div>
+</li>
+<li>
+<p>Next, for the GENDER feature, specify the reference and monitored groups as <strong>F</strong> Monitored and <strong>M</strong> Reference. Then click <strong>Next</strong>.</p>
+<p><img alt="image38" src="../assets/images/openscale/image38.png" /></p>
+</li>
+<li>
+<p>Specify the fairness alert threshold to be 95 and click <strong>Save</strong>.</p>
+<p><img alt="image38b" src="../assets/images/openscale/image38b.png" /></p>
+<div class="admonition optional">
+<p class="admonition-title">Optional</p>
+<p>You could also configure the Drift monitors. For details on Drift monitors, check the <a href="https://www.ibm.com/docs/en/cloud-paks/cp-data/5.2.x?topic=models-configuring-drift-evaluations">Drift documentation page</a>.</p>
+</div>
+</li>
+</ol>
+<h3 id="configure-drift">Configure Drift<a class="headerlink" href="#configure-drift" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>Go to the <strong>Drift v2</strong> tab. Then click the pencil icon to configure it.</p>
+<p><img alt="drift01" src="../assets/images/openscale/drift01.png" /></p>
+</li>
+<li>
+<p>In this case, we'll use OpenScale directly to calculate possible Drift. <strong>Select Compute in Watson OpenScale</strong> and click <strong>Next</strong>.</p>
+<p><img alt="drift02" src="../assets/images/openscale/drift02.png" /></p>
+</li>
+<li>
+<p>Leave the default values. Feel free to read the description of these thresholds. Click <strong>Next</strong>.</p>
+<p><img alt="drift03" src="../assets/images/openscale/drift03.png" /></p>
+</li>
+<li>
+<p>In this case, all features will be considered important to detect drift. Select all features and click <strong>Next</strong>.</p>
+<p><img alt="drift04" src="../assets/images/openscale/drift04.png" /></p>
+</li>
+<li>
+<p>For the root cause analysis, select the following features:</p>
+</li>
+</ol>
+<ul>
+<li>AGE</li>
+<li>ESTINCOME</li>
+<li>GENDER</li>
+<li>RATEPLAN</li>
+<li>
+<p>USAGE
+   Then click <strong>Next</strong>.</p>
+<p><img alt="drift05" src="../assets/images/openscale/drift05.png" /></p>
+</li>
+</ul>
+<ol start="6">
+<li>
+<p>Click <strong>Save</strong>.</p>
+<p><img alt="drift06" src="../assets/images/openscale/drift06.png" /></p>
+</li>
+</ol>
+<h3 id="configure-explainability">Configure Explainability<a class="headerlink" href="#configure-explainability" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>Go to the <strong>General settings</strong> option under the Explainability section. Then click the pencil icon to configure it.</p>
+<p><img alt="image100" src="../assets/images/openscale/image100.png" /></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Two different methods are available for explanations: <a href="https://shap.readthedocs.io/en/latest/">Shapley Additive Explanations (SHAP)</a> or <a href="https://www.openlayer.com/blog/post/understanding-lime-in-5-steps">Local Interpretable Model-agnostic Explanations (LIME)</a>.</p>
+<p>As described in the hint that appears when you click the Information box, SHAP often provides more thorough explanations, but LIME is faster.</p>
+</div>
+</li>
+<li>
+<p>For this workshop, we'll use the LIME explanation method as it's faster. Click <strong>Next</strong>.</p>
+<p><img alt="image101" src="../assets/images/openscale/image101.png" /></p>
+</li>
+<li>
+<p>All features will be analyzed in this case. Click <strong>Save</strong>.</p>
+<p><img alt="image102" src="../assets/images/openscale/image102.png" /></p>
+</li>
+</ol>
+<h3 id="evaluating-the-model">Evaluating the model<a class="headerlink" href="#evaluating-the-model" title="Permanent link">&para;</a></h3>
+<p>Now that the model monitors have been configured, you can run an evaluation of the model.</p>
+<ol>
+<li>
+<p>Click the <strong>X</strong> button to close the Configure monitors window.</p>
+<p><img alt="image40" src="../assets/images/openscale/image40.png" /></p>
+</li>
+<li>
+<p>Click on the <strong>Actions</strong> button then <strong>Evaluate now</strong>.</p>
+<p><img alt="image40b" src="../assets/images/openscale/image40b.png" /></p>
+</li>
+<li>
+<p>On the Import test data page, choose <strong>from CSV file</strong> and click <strong>Browse</strong>.</p>
+<p><img alt="image41" src="../assets/images/openscale/image41.png" /></p>
+</li>
+<li>
+<p>Select the <a href="../assets/customer_churn_openscale_evaluation.csv">customer_churn_openscale_evaluation.csv</a> file that you downloaded at the beginning of the workshop. Then click Upload and evaluate.</p>
+<p><img alt="image41b" src="../assets/images/openscale/image41b.png" /></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>OpenScale will upload the data, run scoring against it and compare the model prediction to the labeled result to compute an overall quality score. It will also run the Fairness monitor to detect any fairness violations. Once the evaluation complete, you get a quick view in the dashboard of the Fairness and Quality results.</p>
+</div>
+</li>
+<li>
+<p>Check the results of the evaluation. in the example below, it shows no alerts Quality, meaning the model meets or exceeds the required thresholds set for those monitors. However, there's an alert for Fairness and two alerts for Drift.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Note that your actual results may be different, and you may see different alerts.</p>
+</div>
+<p><img alt="image42" src="../assets/images/openscale/image42.png" /></p>
+</li>
+</ol>
+<h3 id="reviewing-fairness-and-explainability">Reviewing Fairness and Explainability<a class="headerlink" href="#reviewing-fairness-and-explainability" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>Click the arrow next to the Fairness monitor to review the fairness results further.</p>
+<p><img alt="image43" src="../assets/images/openscale/image43.png" /></p>
+</li>
+<li>
+<p>In this case, no bias was detected in the GENDER feature.</p>
+<p><img alt="image44" src="../assets/images/openscale/image44.png" /></p>
+</li>
+<li>
+<p>Click the <strong>Monitored attribute</strong> option and change it to the <strong>AGE</strong> feature.</p>
+<p><img alt="image45" src="../assets/images/openscale/image45.png" /></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>In this case, a potential bias was found in the model against people in the first age group. Note that the thresholds we set in our monitors are key to decide when OpenScale is going to trigger alerts.</p>
+</div>
+</li>
+<li>
+<p>Click the <strong>View payload transactions</strong> button.</p>
+<p><img alt="image46" src="../assets/images/openscale/image46.png" /></p>
+</li>
+<li>
+<p>These are the transactions that were evaluated. Choose one and click <strong>Explain prediction</strong>. In this example, we'll choose one with individual bias detected.</p>
+<p><img alt="image47" src="../assets/images/openscale/image47.png" /></p>
+</li>
+<li>
+<p>This graph explains how much each feature impacted the decision.</p>
+<p><img alt="image48" src="../assets/images/openscale/image48.png" /></p>
+<p>Go to tab Inspect.</p>
+<p><img alt="image49" src="../assets/images/openscale/image49.png" /></p>
+</li>
+<li>
+<p>In this section you can investigate how features should change for the prediction outcome to change. In the example below, this customer is predicted to churn (Predicted Outcom is T = True). Click <strong>Run analysis</strong>.</p>
+<p><img alt="image50" src="../assets/images/openscale/image50.png" /></p>
+</li>
+<li>
+<p>In this case, the STATUS feature should change from 'M' to 'S' for the model to predict no-churn instead of churn.</p>
+<p><img alt="image51" src="../assets/images/openscale/image51.png" /></p>
+</li>
+<li>
+<p>You can also investigate what the prediction would be if a specific feature changes to another value. For example, let's <strong>change the AGE from 46 to 18</strong>. Then, click <strong>Score new values</strong> to check what would be predicted in that case:</p>
+<p><img alt="image52" src="../assets/images/openscale/image52.png" /></p>
+</li>
+<li>
+<p>The prediction would change to no-churn in that case, with a confidence of 60%.</p>
+<p><img alt="image53" src="../assets/images/openscale/image53.png" /></p>
+</li>
+</ol>
+<h3 id="reviewing-drift">Reviewing Drift<a class="headerlink" href="#reviewing-drift" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>Go back to your deployment by clicking its name in the breadcrumb menu.</p>
+<p><img alt="goToDeployment" src="../assets/images/openscale/goToDeployment.png" /></p>
+</li>
+<li>
+<p>Go to the <strong>Evaluations</strong> tab then click the arrow in the <strong>Drift v2</strong> section to open the drift test details.</p>
+<p><img alt="enterDrift" src="../assets/images/openscale/enterDrift.png" /></p>
+</li>
+<li>
+<p>Review the charts in this page. First, <strong>History</strong> chart.</p>
+<p><img alt="driftHistory" src="../assets/images/openscale/driftHistory.png" /></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>This graph shows how the drift for the prediction (output drift), the incoming/evaluation data (feature drift), and the model quality has evolved in time. Only one evaluation was run in this case.</p>
+</div>
+</li>
+<li>
+<p>Scroll down to the <strong>Output drift</strong> chart. Note that you can see drift charts for each predicted outcome by using the dropdown option:</p>
+<p><img alt="driftOutput-1" src="../assets/images/openscale/driftOutput-1.png" /></p>
+<p><img alt="driftOutput-2" src="../assets/images/openscale/driftOutput-2.png" /></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>This graph shows how the prediction of the model has drifted from the training data to the input/evaluation data.</p>
+<p>In this case, we have a drift issue. We can investigate it further using the following graphs.</p>
+</div>
+</li>
+<li>
+<p>Scroll down to the <strong>Feature drift</strong> chart.</p>
+<p><img alt="driftFeature" src="../assets/images/openscale/driftFeature.png" /></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>This graph shows how the input/evaluated data has changed incomparison with the data that was used to train the model. This is useful to get an idea on which changes in data may have affected the model prediction accuracy, reducing analysis and investigation time.</p>
+<p>In this example, the feature LOCAL has significant changes.</p>
+</div>
+</li>
+<li>
+<p>Scroll down to the following charts.</p>
+<p><img alt="driftFeatureDetails" src="../assets/images/openscale/driftFeatureDetails.png" /></p>
+<p><img alt="driftFeatureDetails-2" src="../assets/images/openscale/driftFeatureDetails-2.png" /></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>For each feature with drift, the amount of changes for each range of values is shown. Besides, the evolution this feature's drift over time is shown in the second graph.</p>
+</div>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", {"toc.integrate": false}, "toc.follow", "content.code.copy", "content.tabs.link", "header.autohide"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+    
+  </body>
+</html>
