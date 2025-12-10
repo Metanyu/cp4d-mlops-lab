@@ -1,0 +1,34 @@
+site_name: MLOps Demo Lab
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - toc.integrate: false
+    - toc.follow
+    - content.code.copy
+    - content.tabs.link
+    - header.autohide
+
+nav:
+  - Home: index.md
+  - 1. End-to-End Data Science Labs:
+      - 1. Data Ingestion & Preparation: section1/data_ingestion.md
+      - 2. Model Training & Deployment: section1/model_training.md
+      - 3. Model Deployment: section1/model_deployment.md
+      - 4. Model Monitoring: section1/model_monitoring.md
+      - 5. AI Pipelines: section1/ai_pipelines.md
+      - 6. AI Factsheet: section1/ai_factsheet.md
+
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
+  - codehilite
+  - footnotes
+  - attr_list
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - sane_lists
