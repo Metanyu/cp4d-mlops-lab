@@ -446,13 +446,41 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#to-be-added-exercise-for-pkl-files-deployment" class="md-nav__link">
+  <a href="#exercise-deploy-a-premade-pkl-model" class="md-nav__link">
     <span class="md-ellipsis">
       
-        To be added: Exercise for .pkl files deployment
+        Exercise: Deploy a premade .pkl model
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Exercise: Deploy a premade .pkl model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deploy-the-model-as-an-online-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deploy the model as an online deployment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-the-deployed-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test the deployed model
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -583,13 +611,41 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#to-be-added-exercise-for-pkl-files-deployment" class="md-nav__link">
+  <a href="#exercise-deploy-a-premade-pkl-model" class="md-nav__link">
     <span class="md-ellipsis">
       
-        To be added: Exercise for .pkl files deployment
+        Exercise: Deploy a premade .pkl model
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Exercise: Deploy a premade .pkl model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deploy-the-model-as-an-online-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deploy the model as an online deployment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-the-deployed-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test the deployed model
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -611,7 +667,79 @@
 
 
 <h1 id="3-further-model-deployment">3. Further model deployment<a class="headerlink" href="#3-further-model-deployment" title="Permanent link">&para;</a></h1>
-<h2 id="to-be-added-exercise-for-pkl-files-deployment">To be added: Exercise for .pkl files deployment<a class="headerlink" href="#to-be-added-exercise-for-pkl-files-deployment" title="Permanent link">&para;</a></h2>
+<h2 id="exercise-deploy-a-premade-pkl-model">Exercise: Deploy a premade .pkl model<a class="headerlink" href="#exercise-deploy-a-premade-pkl-model" title="Permanent link">&para;</a></h2>
+<p>In this section, you will deploy a premade machine learning model saved as a <code>.pkl</code> file. Follow the steps below to complete the deployment process.</p>
+<h3 id="deploy-the-model-as-an-online-deployment">Deploy the model as an online deployment<a class="headerlink" href="#deploy-the-model-as-an-online-deployment" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Download the Model</strong>: Download the premade model file zip <a href="../assets/model.zip"><code>model.zip</code></a>.</li>
+<li>
+<p>Go to your deployment space. Go to tab <strong>Assets</strong>, then click <strong>Import assets +</strong>.</p>
+<p><img alt="DeploymentAsset" src="../assets/images/pkl/DeploymentAsset.png" /></p>
+</li>
+<li>
+<p>In the pop-up window, click <strong>Local file</strong> and select <strong>Model</strong>.</p>
+<p><img alt="importModel" src="../assets/images/pkl/importModel.png" /></p>
+</li>
+<li>
+<p>Select <strong>Browse</strong> to upload the <code>model.zip</code> file you downloaded earlier. Take note of the available formats. In this part, we are uploading the zip file containing the <code>.pkl</code> model.</p>
+<p><img alt="selectModelFile" src="../assets/images/pkl/selectModelFile.png" /></p>
+</li>
+<li>
+<p>In the next window, provide a name for your model (e.g., <code>Churn Detector</code>) and select <strong>Model type</strong> as <code>scikit-learn_1.6</code>, then select <strong>Add</strong>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Toggle off the <code>Suggest model types</code> option to view all available supported model types.</p>
+</div>
+<p><img alt="addModel" src="../assets/images/pkl/addModel.png" /></p>
+</li>
+<li>
+<p>The screen should now show deployments of this model. Click on <strong>Deployments</strong> tab, then click <strong>New deployment</strong>.</p>
+<p><img alt="newDeployment" src="../assets/images/pkl/newDeployment.png" /></p>
+</li>
+<li>
+<p>Select <strong>Online</strong> deployment, and name your deployment (e.g., <code>Churn Detector PKL</code>), then click <strong>Create</strong>.</p>
+<p><img alt="createDeployment" src="../assets/images/pkl/createDeployment.png" /></p>
+</li>
+<li>
+<p>Your model is now deployed! You can view the deployment in the <strong>Deployments</strong> tab.</p>
+<p><img alt="viewDeployment" src="../assets/images/pkl/viewDeployment.png" /></p>
+</li>
+</ol>
+<h3 id="test-the-deployed-model">Test the deployed model<a class="headerlink" href="#test-the-deployed-model" title="Permanent link">&para;</a></h3>
+<p>In this section, we are going to use the endpoint of the deployed model to make predictions.</p>
+<ol>
+<li>From the <strong>Deployments</strong> tab, click on the deployment you just created (e.g., <code>Churn Detector PKL</code>).</li>
+<li>
+<p>Take note of the <strong>Code snippets</strong> has been made available for you. In this section, we are going to use cURL to test the endpoint.</p>
+<p><img alt="codeSnippets" src="../assets/images/pkl/codeSnippets.png" /></p>
+</li>
+<li>
+<p>Copy the cURL command provided in the <strong>Code snippets</strong> section.</p>
+</li>
+<li>
+<p>Get your API key from <strong>Profile and settings</strong> (top right corner). Then, get your <strong>Bearer Token</strong> by using the following cURL command in your terminal (replace <code>&lt;your_api_key&gt;</code> with your actual API key):</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-k<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span>
+<span class="s2">&quot;https://&lt;instance_route&gt;/icp4d-api/v1/authorize&quot;</span><span class="w"> </span><span class="se">\</span>
+-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+-d<span class="w"> </span><span class="s1">&#39;{</span>
+<span class="s1">  &quot;username&quot;:&quot;&lt;username&gt;&quot;,</span>
+<span class="s1">  &quot;api_key&quot;:&quot;&lt;api_key&gt;&quot;</span>
+<span class="s1">}&#39;</span>
+</code></pre></div>
+</li>
+<li>
+<p>Replace the <code>Bearer &lt;token&gt;</code> in the copied cURL command with the token you obtained in the previous step and use this payload:</p>
+<p><div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;input_data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span>
+<span class="w">    </span><span class="nt">&quot;fields&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;ID&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;LONGDISTANCE&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;INTERNATIONAL&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;LOCAL&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;DROPPED&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;PAYMETHOD&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;LOCALBILLTYPE&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;LONGDISTANCEBILLTYPE&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;USAGE&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;RATEPLAN&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;GENDER&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;STATUS&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;CHILDREN&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ESTINCOME&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;CAROWNER&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;AGE&quot;</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;values&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">28</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Auto&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;FreeLocal&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Standard&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">89</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;F&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;M&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">23000</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;N&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">45</span><span class="p">]]</span>
+<span class="w">  </span><span class="p">}]</span>
+<span class="p">}</span>
+</code></pre></div>
+6. Run the modified cURL command in your terminal. You should receive a response with the prediction result from the deployed model.</p>
+<p><img alt="predictionResult" src="../assets/images/pkl/predictionResult.png" /></p>
+</li>
+</ol>
 
 
 
