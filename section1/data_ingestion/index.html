@@ -764,11 +764,15 @@
 <img alt="ImportDataAssets" src="../assets/images/ingest/ImportDataAssets.png" /></p>
 </li>
 <li>
-<p>Upload the three datasets provided earlier:
-   - <code>customer_personal_info_simplified.csv</code>
-   - <code>customer_data_transactions.csv</code>
-   - <code>customer_churn_labels.csv</code>  </p>
+<p>Upload the three datasets provided earlier:</p>
 </li>
+</ol>
+<ul>
+<li><code>customer_personal_info_simplified.csv</code></li>
+<li><code>customer_data_transactions.csv</code></li>
+<li><code>customer_churn_labels.csv</code>  </li>
+</ul>
+<ol start="7">
 <li>Verify the 3 CSV files have been uploaded to your project by clicking the <strong>Assets</strong> tab. You should see all 3 files under the Data assets section:<br />
 <img alt="CsvUploadProject" src="../assets/images/ingest/CsvUploadProject.png" /></li>
 <li>
@@ -792,7 +796,7 @@
 <img alt="DataRefineryAsset" src="../assets/images/ingest/DataRefineryAsset.png" /></p>
 </li>
 <li>
-<p>Select <strong>Select from project → Data asset → customer_data_transactions.csv</strong> then click <strong>Select</strong>. Enter name for your data refinery asset: <code>customer_data_transactions.csv_flow</code>, then select <strong>Create</strong>.
+<p>Select <strong>Select from project → Data asset → customer_data_transactions.csv</strong> then click <strong>Select</strong>. Enter name for your data refinery asset: <code>customer-data-refinery</code>, then select <strong>Create</strong>.
    <img alt="DataRefineryDataAssetSelection" src="../assets/images/ingest/DataRefineryDataAssetSelection.png" />
    <img alt="DataRefineryDataAssetCreation" src="../assets/images/ingest/DataRefineryDataAssetCreation.png" /></p>
 </li>
@@ -832,9 +836,11 @@ Back on the Join operation window, click <strong>Select column</strong> to speci
 <img alt="DataSetJoinKeys" src="../assets/images/ingest/DataSetJoinKeys.png" /></p>
 </li>
 <li>
-<p>On the next window, it shows all the fields that will result from the join operation. At this point, you can remove fields you do not wish to include in the final data set. For this lab, keep all the fields selected and click <strong>Apply</strong>.
-   <img alt="DataSetJoinAttributes" src="../assets/images/ingest/DataSetJoinAttributes.png" /></p>
+<p>On the next window, it shows all the fields that will result from the join operation. At this point, you can remove fields you do not wish to include in the final data set. For this lab, keep all the fields selected and click <strong>Apply</strong>.</p>
 </li>
+</ol>
+<p><img alt="DataSetJoinAttributes" src="../assets/images/ingest/DataSetJoinAttributes.png" /></p>
+<ol start="2">
 <li>Repeat the process (previous 3 steps) to apply a join operation on the resulting data set and the <code>customer_churn_labels.csv</code> dataset. The data set to join is <code>customer_churn_labels.csv</code>, and the join field is <code>ID</code>.
     <img alt="DataSetJoin2" src="../assets/images/ingest/DataSetJoin2.png" /></li>
 <li>
@@ -864,7 +870,7 @@ Back on the Join operation window, click <strong>Select column</strong> to speci
     <img alt="CreateAJobConfig" src="../assets/images/ingest/CreateAJobConfig.png" /></p>
 <p>On the <strong>Configure</strong> tab, review the <strong>Environment</strong> and keep the default selection <em>Default Data Refinery XS</em>, then click <strong>Next</strong>. For jobs that require more resources, you can select a larger Environment to run the job.
 <img alt="CreateAJobConfig2" src="../assets/images/ingest/CreateAJobConfig2.png" /></p>
-<p>On the <strong>Schedule</strong> tab, keep the Schedule slider set to off, and click <strong>Next</strong>. In this lab, we don't need to run the data refinery job at a given schedule but we'll manually run it as needed and that is why we kept the default selection as off.
+<p>On the <strong>Schedule</strong> tab, check <code>Run after job creation</code> and keep the <code>Run on a schedule</code> unchecked , and click <strong>Next</strong>. In this lab, we don't need to run the data refinery job at a given schedule.
 <img alt="CreateAJobConfig3" src="../assets/images/ingest/CreateAJobConfig3.png" /></p>
 <p>On the <strong>Notify</strong> tab, keep the Notification off as default. Click <strong>Next</strong>.
 <img alt="CreateAJobConfig4" src="../assets/images/ingest/CreateAJobConfig4.png" /></p>
@@ -876,7 +882,7 @@ Back on the Join operation window, click <strong>Select column</strong> to speci
 <p><img alt="GoToJobs" src="../assets/images/ingest/GoToJobs.png" /></p>
 </li>
 <li>
-<p>On the <strong>Jobs</strong> page, you can filter the view by selecting whether you want to look at <strong>Active runs, Jobs with active runs, Jobs with finished runs</strong>, or <strong>Finished runs</strong>. Feel free to filter the different views to see the results. Initially, the job will appear in the view <strong>Jobs with active runs</strong> and when it completes, the job will appear in the view <strong>Jobs with finished runs</strong>. Feel free to click on the job name and review the details and status of the run(s).
+<p>On the <strong>Jobs</strong> page, you can filter the view by selecting whether you want to look at different <em>Job types</em> (e.g,  Data Refinery flow, Notebook) or different <em>Run status</em> (e.g, Queued, Running, Completed). Feel free to filter the different views to see the results. Initially, the job will appear in the view <strong>Run status: Running</strong> and when it completes, the job will appear in the view <strong>Run status: Completed</strong>. Feel free to click on the job name and review the details and status of the run(s).
     <img alt="ViewJobs" src="../assets/images/ingest/ViewJobs.png" /></p>
 </li>
 <li>
