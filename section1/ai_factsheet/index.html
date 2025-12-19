@@ -9,6 +9,8 @@
       
       
       
+        <link rel="prev" href="../ai_pipelines/">
+      
       
       
         
@@ -184,10 +186,12 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../data_ingestion/" class="md-tabs__link">
           
   
@@ -264,28 +268,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   
@@ -303,7 +310,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -454,6 +461,103 @@
 
               
             
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. AI Factsheet
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. AI Factsheet
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-1-create-an-ai-use-case" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 1: Create an AI Use Case
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-2-track-your-model-in-the-ai-use-case" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 2: Track your Model in the AI use case
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -488,10 +592,21 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#to-be-added-exercise-for-using-ai-factsheet" class="md-nav__link">
+  <a href="#exercise-1-create-an-ai-use-case" class="md-nav__link">
     <span class="md-ellipsis">
       
-        To be added: Exercise for using AI Factsheet
+        Exercise 1: Create an AI Use Case
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-2-track-your-model-in-the-ai-use-case" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 2: Track your Model in the AI use case
       
     </span>
   </a>
@@ -516,7 +631,98 @@
 
 
 <h1 id="6-ai-factsheet">6. AI Factsheet<a class="headerlink" href="#6-ai-factsheet" title="Permanent link">&para;</a></h1>
-<h2 id="to-be-added-exercise-for-using-ai-factsheet">To be added: Exercise for using AI Factsheet<a class="headerlink" href="#to-be-added-exercise-for-using-ai-factsheet" title="Permanent link">&para;</a></h2>
+<p>The government of ML Models is managed from AI Use Cases. These AI Use Cases document the whole lifecycle of your models, from the initial planning to the monitoring of models in Production.</p>
+<p>This capability is provided by either the service FactSheets or watsonx.governance.</p>
+<h2 id="exercise-1-create-an-ai-use-case">Exercise 1: Create an AI Use Case<a class="headerlink" href="#exercise-1-create-an-ai-use-case" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>Go to menu <strong>AI Governance &gt; AI use cases</strong>.</p>
+<p><img alt="aiUseCases" src="../assets/images/ai_factsheet/aiUseCases.png" /></p>
+</li>
+<li>
+<p>Click New AI use case.</p>
+<p><img alt="createUseCase" src="../assets/images/ai_factsheet/createUseCase.png" /></p>
+</li>
+<li>
+<p>Insert the following information to create your AI Use Case for predicting your customers' churn:</p>
+<ul>
+<li><strong>Name</strong>: "<YourUser> Churn Prediction" (for example: user0 Churn Prediction)</li>
+<li><strong>Risk Level</strong>: Set whatever risk level you want for this use case</li>
+<li><strong>Inventory</strong>: AI_inventory</li>
+<li><strong>Purpose</strong>: "Predict if customers are going to churn"</li>
+<li><strong>Status</strong>: "Awaiting development"</li>
+<li><strong>Tags</strong>: "Churn"</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Note all the available values in Status. This field documents all the lifecycle stages</p>
+</div>
+<p>Then click <strong>Create.</strong></p>
+<p><img alt="newUseCase" src="../assets/images/ai_factsheet/newUseCase.png" /></p>
+</li>
+<li>
+<p>Your new AI Use Case has been created. All the deployment, training, promoting, and monitoring actions related to this use case will be documented here. Click <strong>Lifecycle.</strong></p>
+<p><img alt="useCase" src="../assets/images/ai_factsheet/useCase.png" /></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>You could create different approaches to this use case, and track your models in the approach each of them is using. In this workshop we'll just use the Default approach, so no additional action is needed.</p>
+</div>
+<p><img alt="defaultApproach" src="../assets/images/ai_factsheet/defaultApproach.png" /></p>
+</li>
+</ol>
+<h2 id="exercise-2-track-your-model-in-the-ai-use-case">Exercise 2: Track your Model in the AI use case<a class="headerlink" href="#exercise-2-track-your-model-in-the-ai-use-case" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>Navigate back to the project assets by clicking your project's name and then clicking the <strong>Assets</strong> tab.</p>
+<p>Click on the name of your saved model <strong><YourUser/>_autoai_churn_prediction - P5 Extra Trees Classifier - Model</strong> to open it.</p>
+<p><img alt="openModel" src="../assets/images/ai_factsheet/openModel.png" /></p>
+</li>
+<li>
+<p>Feel free to check all the information available now; as the lifecycle continues, more sections will be populated.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>This view contains all the governance information of your model. It includes information about the use case, how the model was trained, which data was used to train it, the evaluations of the model, the monitoring alerts...</p>
+</div>
+<p><img alt="factsheet" src="../assets/images/ai_factsheet/factsheet.png" /></p>
+</li>
+<li>
+<p>Click <strong>Track in AI use case</strong>.</p>
+<p><img alt="trackUseCase" src="../assets/images/ai_factsheet/trackUseCase.png" /></p>
+</li>
+<li>
+<p>Select your AI Use Case then click <strong>Next</strong>.</p>
+<p><img alt="defineUseCase" src="../assets/images/ai_factsheet/defineUseCase.png" /></p>
+</li>
+<li>
+<p>You'll use the Default approach. You could've created different approaches for the use case. Click <strong>Next</strong>.</p>
+<p><img alt="approach" src="../assets/images/ai_factsheet/approach.png" /></p>
+</li>
+<li>
+<p>You can set a version number to this specific model. In this case, it's not been tested yet, so select version 0.0.1. Then click <strong>Next</strong>.</p>
+<p><img alt="modelVersion" src="../assets/images/ai_factsheet/modelVersion.png" /></p>
+</li>
+<li>
+<p>Click <strong>Track asset</strong>.</p>
+<p><img alt="clickTrackAsset" src="../assets/images/ai_factsheet/clickTrackAsset.png" /></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>The information of your model indicates that the model is in the Development phase, as it has not been deployed for testing yet.</p>
+</div>
+<p><img alt="factsheet-2" src="../assets/images/ai_factsheet/factsheet-2.png" /></p>
+</li>
+<li>
+<p>Check your AI Use Case. Go to menu <strong>AI Governance &gt; AI use cases</strong>.</p>
+<p><img alt="aiUseCases" src="../assets/images/ai_factsheet/aiUseCases.png" /></p>
+</li>
+<li>
+<p>Then open your use case.</p>
+<p><img alt="openUseCase" src="../assets/images/ai_factsheet/openUseCase.png" /></p>
+</li>
+<li>
+<p>Go to the <strong>Lifecycle</strong> tab. This tab shows which assets are being used in each stage of the model's lifecycle. Note that your trained model has been added to the Develop step. Besides, all available model versions are shown in this view.</p>
+<p><img alt="lifecycleTab" src="../assets/images/ai_factsheet/lifecycleTab.png" /></p>
+</li>
+</ol>
 
 
 
