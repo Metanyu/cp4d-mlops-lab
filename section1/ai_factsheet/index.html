@@ -549,6 +549,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#workaround-track-deployed-model-in-the-ai-use-case" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workaround: Track deployed Model in the AI use case
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -607,6 +618,17 @@
     <span class="md-ellipsis">
       
         Exercise 2: Track your Model in the AI use case
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workaround-track-deployed-model-in-the-ai-use-case" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workaround: Track deployed Model in the AI use case
       
     </span>
   </a>
@@ -721,6 +743,30 @@
 <li>
 <p>Go to the <strong>Lifecycle</strong> tab. This tab shows which assets are being used in each stage of the model's lifecycle. Note that your trained model has been added to the Develop step. Besides, all available model versions are shown in this view.</p>
 <p><img alt="lifecycleTab" src="../assets/images/ai_factsheet/lifecycleTab.png" /></p>
+</li>
+</ol>
+<h2 id="workaround-track-deployed-model-in-the-ai-use-case">Workaround: Track deployed Model in the AI use case<a class="headerlink" href="#workaround-track-deployed-model-in-the-ai-use-case" title="Permanent link">&para;</a></h2>
+<p>There's a known issue in the current version of the workshop environment that prevents the AI Use Case from automatically register that the model was deployed in a Test Space (Even though it was tracked from project screen). Follow this workaround:</p>
+<ol>
+<li>
+<p>Go to your deployment space. Go to tab <strong>Assets</strong>, then click on the model of interest.</p>
+<p><img alt="clickModel" src="../assets/images/ai_factsheet/clickModel.png" /></p>
+</li>
+<li>
+<p>Go to the <strong>AI Factsheet</strong> tab then click <strong>Untrack</strong>:</p>
+<p><img alt="untrack" src="../assets/images/ai_factsheet/untrack.png" /></p>
+</li>
+<li>
+<p>Click <strong>Untrack</strong>:</p>
+<p><img alt="untrack-2" src="../assets/images/ai_factsheet/untrack-2.png" /></p>
+</li>
+<li>
+<p>Now click Track in AI use case to enable tracking again:</p>
+<p><img alt="track-2" src="../assets/images/ai_factsheet/track-2.png" /></p>
+</li>
+<li>
+<p>Choose your AI Use Case and follow the same steps as you did before. Now, the Test step should be enabled because a Testing Deployment was detected:</p>
+<p><img alt="nowItWorks" src="../assets/images/ai_factsheet/nowItWorks.png" /></p>
 </li>
 </ol>
 
